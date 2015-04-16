@@ -1,0 +1,49 @@
+1. As far as I see, this in a bug free project both in Xcode and VS.
+
+2. 
+The big-O requirements are satisfied for set(), get(), touch() and discard(),since I used Orthogonal List to implement the hashtable. Horizontally the node links to the same bucket and vertically, the nodes are linked in a chronological manner.
+
+3.
+HashTable:: set(){
+	compute corresponding buckedNum for the key
+	if the bucket is not written
+		if full return false
+		else
+			insert the new node horizontally
+			if the node is not permanent, add it to the tail vertically
+			return true
+	else if the node exits in the table
+		replace it and touch it
+		return true
+	else
+		if full return false
+		add it to the tail horizontally
+		if the node is not permanent, add it to the tail vertically
+		return true
+}
+
+
+
+
+HashTable:: touch(){
+	try to find this key in hashtable
+	if not found or if this node is permanent, return false
+	if the node is at queue tail, do nothing and return true
+	if the node is at queue head
+		if there is only 1 node, do nothing and return true
+		else there are more than 1 node, move this node to the queue tail and return true
+	else the node is at the middle of queue
+		move the node to the queue tail and return true
+}
+
+
+
+HashTable:: discard(){
+	if there is no node vertically, return false
+	//discard the node at the vertical head of list
+	if there is only one node vertically
+		discard that node and reset queue head and queue tail
+	else there are more than one node verticallu
+		discard the head and reset queue head and queue tail
+	return true;
+}
